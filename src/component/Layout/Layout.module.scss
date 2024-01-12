@@ -1,0 +1,36 @@
+.wrapper {
+  height: 100vh;
+  width: 100%;
+  font-family: "Times New Roman", Times, serif;
+}
+.header {
+  padding: 0.5rem 1rem;
+  display: flex;
+  gap: 65%;
+}
+.logo {
+  width: 11rem;
+}
+.profileDetails {
+  display: flex;
+  gap: 1.5rem;
+}
+.profilePicture {
+  object-fit: contain;
+}
+.profileName {
+  color: #2d416f;
+  font-size: 1.125rem;
+  font-weight: 600;
+  line-height: 0.5rem;
+}
+.profileRole {
+  color: #818da9;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 0.5rem;
+}
+
+// // // // // // // // // COMPLETED HEADER style
+
+
