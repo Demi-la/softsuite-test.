@@ -1,9 +1,20 @@
 .wrapper {
+  position: relative;
   height: 100vh;
   width: 100%;
-  font-family: "Times New Roman", Times, serif;
+  overflow: hidden;
+  overflow-y: scroll;
+}
+.mainContent{
+    margin-top:6rem;
+    display: flex;
+
 }
 .header {
+  position: fixed;
+  z-index: 2px;
+  top: 0;
+  width: 100%;
   padding: 0.5rem 1rem;
   display: flex;
   gap: 65%;
@@ -33,4 +44,41 @@
 
 // // // // // // // // // COMPLETED HEADER style
 
+.nav {
+//   background-color: yellow;
+  width: 16rem;
+  height: 90vh;
+}
+// .nav :active {
+//   background-color: hsla(149, 39%, 48%, 1);
+//   width: 16rem;
+//   height: 2.5rem;
+// }
+.navList {
+  padding: 0;
+  padding: 2rem;
+  color: hsla(222, 19%, 58%, 1);
+}
+.navElement {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.settingIcon {
+  width: 1.5rem;
+  height: 1.5rem;
+}
+.settingIcon :active {
+  color: white;
+}
+.elementText {
+  font-size: 0.875rem;
+  font-weight: 500;
+  font-family: "Poppins", sans-serif;
+  margin-right: 2rem;
+}
 
+
+.content {
+    flex-grow: 1;
+}

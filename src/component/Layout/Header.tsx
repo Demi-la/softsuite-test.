@@ -10,7 +10,7 @@ interface HeaderType {
 const Header: React.FC<HeaderType> = () => {
   console.log(Style)
   return (
-    <div className={Style.header}>
+    <header className={Style.header}>
       <img src={Logo} alt="SoftSuite Logo" className={Style.logo} />
 
       <div className={Style.profileDetails}>
@@ -25,7 +25,7 @@ const Header: React.FC<HeaderType> = () => {
           <p className={Style.profileRole}>Payroll Manager</p>
         </div>
       </div>
-    </div>
+    </header>
   );
 }
 

@@ -1,0 +1,15 @@
+.btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+  height: 2.5rem;
+  border-radius: 0.5rem;
+  padding: 0 10px;
+}
+
+.primary {
+  background-color: #4baa79;
+  color: white;
+  border: 1px solid #4baa79;
+}

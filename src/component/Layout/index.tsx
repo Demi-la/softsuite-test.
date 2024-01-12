@@ -11,14 +11,10 @@ interface LayoutType {
 const Layout: React.FC<LayoutType> = () => {
   return (
     <div className={Style.wrapper}>
-      <header>
-        <Header />
-      </header>
-      <div>
-        <nav>
-          <Nav />
-        </nav>
-        <main>
+      <Header />
+      <div className={Style.mainContent}>
+        <Nav />
+        <main className={Style.content}>
           <Outlet />
         </main>
       </div>
