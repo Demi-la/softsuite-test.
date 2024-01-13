@@ -1,5 +1,31 @@
-.contentWrapper{
-    background-color: #F4F6F8;
-    height: 100vh;
-    border-top: 1px solid #E7E7E7;
+
+.contentWrapper {
+    background-color: white;
+}
+
+.contentContainer {
+background-color: white;
+width: 95%;
+// height: 28rem;
+margin-top: 2.75rem;
+margin-left: 2rem
+}
+.title{
+    font-size:1.1875rem;
+    color:hsla(222, 42%, 31%, 1) ;
+    font-weight:700;
+    padding: 1.5rem;
+}
+.modalHeader{
+    background-color:#F4F6F8;
+    padding: 1rem;
+    margin: 1rem;
+}
+.Wrapper{
+    display: flex;
+    justify-content: space-between;
+}
+.search{
+    display: flex;
+    gap: 1rem;
 }

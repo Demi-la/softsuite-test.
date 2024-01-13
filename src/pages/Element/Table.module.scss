@@ -1,0 +1,43 @@
+
+td,
+th {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #cde1e3;
+}
+table {
+  border-collapse: collapse;
+  width: 95%;
+  margin: 0 1rem 0 1rem;
+}
+.tableHeader {
+  background-color: #2d416f;
+  color: white;
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+.tableBody {
+  font-size: 0.8rem;
+  font-weight: 400;
+  color: #2d416f;
+}
+.PaginationBtn {
+  display: flex;
+  gap: 2rem;
+  margin-top: 1.88rem;
+   justify-content: end;
+   margin-right: 2rem;
+}
+.leftBtn,
+.rightBtn {
+  background-color: #e2e2e2;
+  display: flex;
+  padding: 0.75rem 0.75rem;
+  justify-content: center;
+  align-items: center;
+  font-size: 1rem;
+  color: #2d416f;
+  border: none;
+  border-radius: 0.25rem;
+  
+}

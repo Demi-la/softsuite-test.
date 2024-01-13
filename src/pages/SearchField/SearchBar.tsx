@@ -12,7 +12,7 @@ interface searchBarType {
 const SearchBar: React.FC<searchBarType> = (props) => {
   const { onChange, value, children, ...rest } = props;
 
-  const [search, setSearch] = useState();
+
 
 
   return (

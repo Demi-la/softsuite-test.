@@ -5,10 +5,9 @@
   overflow: hidden;
   overflow-y: scroll;
 }
-.mainContent{
-    margin-top:6rem;
-    display: flex;
-
+.mainContent {
+  margin-top: 6rem;
+  display: flex;
 }
 .header {
   position: fixed;
@@ -45,7 +44,7 @@
 // // // // // // // // // COMPLETED HEADER style
 
 .nav {
-//   background-color: yellow;
+  //   background-color: yellow;
   width: 16rem;
   height: 90vh;
 }
@@ -78,7 +77,9 @@
   margin-right: 2rem;
 }
 
-
 .content {
-    flex-grow: 1;
+  flex-grow: 1;
+  background-color: #f4f6f8;
+  height: 100vh;
+  border-top: 1px solid #e7e7e7;
 }
