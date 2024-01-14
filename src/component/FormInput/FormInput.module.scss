@@ -1,0 +1,56 @@
+.formLabel {
+  color: #818da9;
+  font-size: 0.875rem;
+  font-weight: 400;
+}
+input,
+.radioWrapper {
+  border: 1px solid #e5e5e5;
+  padding: 1rem;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
+  outline: none;
+  width: 80%;
+}
+.descriptionText {
+  height: 5rem;
+  outline: none;
+  width: 100%;
+  margin-top: 0.5rem;
+  border: 1px solid #e5e5e5;
+  //   padding: 1rem;
+}
+
+.selectInput {
+  margin-top: 0.5rem;
+  width: 90%;
+  //   border: 1px solid #e5e5e5;
+  //   padding: 3rem;
+  > div {
+    padding: 8px;
+
+    > div:last-child > span {
+      background-color: #ffffff00;
+    }
+  }
+}
+
+.radioWrapper {
+  display: flex;
+  gap: 15px;
+
+  > label {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+
+    > input {
+      margin: 0;
+      accent-color: green;
+    }
+
+    // > input[type="radio"] {
+    //   accent-color: #4baa79;
+    // }
+  }
+}

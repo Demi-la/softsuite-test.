@@ -1,8 +1,8 @@
-import React, { Children } from "react";
+import React, { Children, useMemo } from "react";
 import Style from "./Element.module.scss";
-import Button from "../Button";
+import Button from "../../component/Button";
 import { FiEye, FiPlus } from "react-icons/fi";
-import SearchBar from "../SearchField/SearchBar";
+import SearchBar from "../../component/SearchField/SearchBar";
 import { CiSearch } from "react-icons/ci";
 import FilterBtn from "../../assets/FilterBtn.svg";
 import Table from "./Table";
@@ -15,16 +15,31 @@ import {
 } from "../../redux/api";
 import LookUpValue from "../../component/lookup";
 import { useState } from "react";
-import Popup from "../Popop";
-import Action from "../Action";
-import Modal from "../Modal";
+import Popup from "../../component/Popop";
+import Action from "../../component/Action";
 import ModalDeleteIcon from "../../assets/ModalDeleteIcon.svg";
+import CreateElement from "../../component/Modal";
+import { FirstTab } from "./forms";
+import { useForm } from "react-hook-form";
 interface ElementType {
   //
 }
 
+const tabs = [FirstTab];
+
 const Element: React.FC<ElementType> = () => {
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>();
   const { data: elements, error, isLoading } = useGetElementsQuery();
+  const [tabIndex, setTabIndex] = useState(0);
+  const Component = useMemo(() => tabs[tabIndex], [tabIndex]);
+
+  // const getComponent = (index: number) => tabs[index];
+
+  const [modalOpen, setModalOpen] = useState<boolean>(false);
 
   const elementColumns: ColumnDef<object>[] = [
     {
@@ -81,22 +96,36 @@ const Element: React.FC<ElementType> = () => {
             <SearchBar children={<CiSearch />} />
             <img src={FilterBtn} alt="Filter" />
           </div>
-          <Button icon={<FiPlus />}>Create Element</Button>
+          <Button
+            icon={<FiPlus />}
+            onClick={() => {
+              setModalOpen(true);
+            }}
+          >
+            Create Element
+          </Button>
         </div>
       </div>
       <Table data={elements?.data.content || []} columns={elementColumns} />
-      {/* <Modal
-        icon={
-          <>
-            <img src={ModalDeleteIcon} alt="Delete Icon" />
-          </>
-        }
-        message={<p>Are you sure you want to delete Element ?</p>}
-        buttonText="Cancel"
-        buttonConfirmText="Yes, Delete"
+
+      {/* {modalOpen && <CreateElement  />} */}
+      <CreateElement
+        isOpen={modalOpen}
+        onCloseModal={setModalOpen}
+        title="Create Element"
       >
-        You can’t reverse this action
-      </Modal> */}
+        <form onSubmit={handleSubmit(() => {})}>
+          <Component register={register} errors={errors} />
+        </form>
+        <Button className={Style.nextBtn}>Next</Button>
+      </CreateElement>
+
+      {/* <button className={Style.modalButton} onClick={onButtonClick}>
+        {buttonText}
+      </button>
+      <button className={Style.modalButtonConfirm} onClick={onButtonClick}>
+        {buttonConfirmText}
+      </button> */}
     </div>
   );
 };
