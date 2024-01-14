@@ -1,56 +1,77 @@
-import React from "react";
+import React, { Children } from "react";
 import Style from "./Element.module.scss";
 import Button from "../Button";
-import { FiPlus } from "react-icons/fi";
+import { FiEye, FiPlus } from "react-icons/fi";
 import SearchBar from "../SearchField/SearchBar";
 import { CiSearch } from "react-icons/ci";
-import FilterBtn from "../../Assets/FilterBtn.svg";
-import Mdata from "../../MOCK_DATA.json";
+import FilterBtn from "../../assets/FilterBtn.svg";
 import Table from "./Table";
-import { useMemo } from "react";
-import { Data } from "./Data";
-import actionButton from "../../Assets/actionButton.svg"
-import { ColumnDef, Row } from "@tanstack/react-table";
+import actionButton from "../../assets/actionButton.svg";
+import { ColumnDef } from "@tanstack/react-table";
+import {
+  useGetElementsQuery,
+  useGetLookUpsQuery,
+  useGetLookUpValueByIdQuery,
+} from "../../redux/api";
+import LookUpValue from "../../component/lookup";
+import { useState } from "react";
+import Popup from "../Popop";
+import Action from "../Action";
+import Modal from "../Modal";
+import ModalDeleteIcon from "../../assets/ModalDeleteIcon.svg";
 interface ElementType {
+  //
 }
 
 const Element: React.FC<ElementType> = () => {
-  const data = useMemo(() => Data, []);
-  /** @type import('@tanstack/react-table').ColumnDef<any> */
-  /** @type import('@tanstack/react-table').ColumnDef<any> */
+  const { data: elements, error, isLoading } = useGetElementsQuery();
 
-     const elementColumns: ColumnDef<object>[] = [
-       {
-         header: "Name",
-         accessorKey: "name",
-       },
-       {
-         header: "Element Category",
-         accessorKey: "category",
-       },
-       {
-         header: "Element Classification",
-         accessorKey: "classification",
-       },
-       {
-         header: "Status",
-         accessorKey: "status",
-       },
-       {
-         header: "Date & Time Modified",
-         accessorKey: "Date",
-       },
-       {
-         header: "Modified By",
-         accessorKey: "modifield",
-       },
-       {
-         header: "Action",
-         cell: info => (
-           <img src={actionButton} alt="Action" className={Style.actionImage} />
-         ),
-       },
-     ];
+  const elementColumns: ColumnDef<object>[] = [
+    {
+      header: "Name",
+      accessorKey: "name",
+    },
+    {
+      header: "Element Category",
+
+      accessorFn: (row: any) => `${row.categoryId} ${row.categoryValueId}`,
+      cell: (info) => <LookUpValue lookUpIds={info.getValue() as string} />,
+    },
+    {
+      header: "Element Classification",
+
+      accessorFn: (row: any) =>
+        `${row.classificationId} ${row.classificationValueId}`,
+      cell: (info) => <LookUpValue lookUpIds={info.getValue() as string} />,
+    },
+    {
+      header: "Status",
+      accessorKey: "status",
+    },
+    {
+      header: "Date & Time Modified",
+      accessorKey: "createdAt",
+    },
+    {
+      header: "Modified By",
+      accessorKey: "modifiedBy",
+    },
+    {
+      header: "Action",
+      cell: (info) => (
+        <Popup content={<Action />}>
+          <img
+            src={actionButton}
+            alt="Action"
+            className={Style.actionImage}
+            // onClick={() => {
+            //   setModalOpen(true);
+            // }}
+          />
+        </Popup>
+      ),
+    },
+  ];
   return (
     <div className={Style.contentContainer}>
       <p className={Style.title}>Elements</p>
@@ -63,7 +84,19 @@ const Element: React.FC<ElementType> = () => {
           <Button icon={<FiPlus />}>Create Element</Button>
         </div>
       </div>
-      <Table data={data} columns={elementColumns} />
+      <Table data={elements?.data.content || []} columns={elementColumns} />
+      {/* <Modal
+        icon={
+          <>
+            <img src={ModalDeleteIcon} alt="Delete Icon" />
+          </>
+        }
+        message={<p>Are you sure you want to delete Element ?</p>}
+        buttonText="Cancel"
+        buttonConfirmText="Yes, Delete"
+      >
+        You can’t reverse this action
+      </Modal> */}
     </div>
   );
 };

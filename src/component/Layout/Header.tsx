@@ -1,14 +1,13 @@
-import React from 'react'
-import Style  from "./Layout.module.scss"
-import Logo from "../../Assets/Logo.svg"
-import Notification from "../../Assets/Notification.svg"
-import Henry from "../../Assets/Henry.png"
+import React from "react";
+import Style from "./Layout.module.scss";
+import Logo from "../../assets/Logo.svg";
+import Notification from "../../assets/Notification.svg";
+import Henry from "../../assets/Henry.png";
 
-interface HeaderType {
-}
+interface HeaderType {}
 
 const Header: React.FC<HeaderType> = () => {
-  console.log(Style)
+  console.log(Style);
   return (
     <header className={Style.header}>
       <img src={Logo} alt="SoftSuite Logo" className={Style.logo} />
@@ -27,6 +26,6 @@ const Header: React.FC<HeaderType> = () => {
       </div>
     </header>
   );
-}
+};
 
-export default Header
+export default Header;

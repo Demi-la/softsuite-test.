@@ -82,14 +82,16 @@ const Table: React.FC<TableType> = (props) => {
         {/* <button onClick={() => table.setPageIndex(0)}>First page</button> */}
         <button
           disabled={!table.getCanPreviousPage()}
-          onClick={() => table.previousPage()}
+          // onClick={() => table.previousPage()}
+          onClick={() => table.setPageIndex(0)}
           className={Style.leftBtn}
         >
           <MdArrowBackIos />
         </button>
         <button
           disabled={!table.getCanNextPage()}
-          onClick={() => table.nextPage()}
+          onClick={() => table.setPageIndex(table.getPageCount() - 1)}
+          // onClick={() => table.nextPage()}
           className={Style.rightBtn}
         >
           <MdArrowForwardIos />
