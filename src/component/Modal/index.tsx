@@ -3,11 +3,15 @@ import Style from "./CreateElement.module.scss";
 import Modal from "react-modal";
 import ReactModal from "react-modal";
 import { useState } from "react";
+import Button from "../Button";
+import arrow from "../../assets/Check.svg";
 interface CreateElementType {
   children: React.ReactNode;
   isOpen: boolean;
   onCloseModal: (isOpen: boolean) => void;
   title?: string;
+  steps: string[];
+  stepperCurrentStep?: any;
 }
 
 const modalStyle = {
@@ -15,7 +19,7 @@ const modalStyle = {
     backgroundColor: "rgba(0, 0, 0, 0.45)",
   },
   content: {
-    inset: "50px",
+    inset: "30px",
     width: "50rem",
     margin: "auto",
     border: "none",
@@ -27,7 +31,11 @@ const CreateElement: React.FC<CreateElementType> = ({
   isOpen,
   onCloseModal,
   title,
+  steps,
+  stepperCurrentStep,
 }) => {
+  console.log(stepperCurrentStep);
+
   return (
     <ReactModal isOpen={isOpen} style={modalStyle}>
       <div className={Style.container}>
@@ -36,6 +44,23 @@ const CreateElement: React.FC<CreateElementType> = ({
           <span onClick={() => onCloseModal(false)} className={Style.span}>
             X
           </span>
+        </div>
+        <div className={Style.stepperContainer}>
+          {steps.map((step, index) => (
+            <div key={index} className={Style.stepperWrapper}>
+              <div className={Style.stepperContent}>{step}</div>
+              <div className={Style.stepper}>
+                {/* {stepperCurrentStep >= index + 1 ? "red" : "green"} */}
+              </div>
+              <div className={Style.stepper}>
+                {stepperCurrentStep > index + 1 ? (
+                  <img src={arrow} alt="" />
+                ) : (
+                  index + 1
+                )}
+              </div>
+            </div>
+          ))}
         </div>
         <div className={Style.ModalContent}>{children}</div>
       </div>

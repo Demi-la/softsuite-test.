@@ -19,12 +19,12 @@ export const apiRequest = createApi({
       query: ({ lookupId, lookupValueId }) =>
         `lookups/${lookupId}/lookupvalues/${lookupValueId}`,
     }),
-    // getdeleteElement: builder.mutation<void, string>({
-    //   query: (id) => ({
-    //     url: `elements/${id}`,
-    //     method: "DELETE",
-    //   }),
-    // }),
+    getdeleteElement: builder.mutation<void, string>({
+      query: (id) => ({
+        url: `elements/${id}`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
@@ -32,5 +32,5 @@ export const {
   useGetElementsQuery,
   useGetLookUpsQuery,
   useGetLookUpValueByIdQuery,
-  // useGetdeleteElementMutation
+  useGetdeleteElementMutation
 } = apiRequest;

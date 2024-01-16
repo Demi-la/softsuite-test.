@@ -39,6 +39,9 @@ const Table: React.FC<TableType> = (props) => {
     onSortingChange: setSorting,
     onGlobalFilterChange: setFiltering,
   });
+
+  
+  
   return (
     <div>
       {/* <input
