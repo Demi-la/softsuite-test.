@@ -8,10 +8,11 @@
 }
 .searchInput {
   width: 17.7rem;
+  margin: 0;
   border: none;
 }
-.searchBTN button {
-  height: 2.5rem;
+.searchBTN, .button {
+  height: 2.345rem;
   width: 2.5rem;
   border: none;
   background-color: hsla(149, 39%, 48%, 1);

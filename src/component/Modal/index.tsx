@@ -19,7 +19,7 @@ const modalStyle = {
     backgroundColor: "rgba(0, 0, 0, 0.45)",
   },
   content: {
-    inset: "30px",
+    inset: "10px",
     width: "50rem",
     margin: "auto",
     border: "none",

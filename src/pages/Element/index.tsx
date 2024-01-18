@@ -11,66 +11,165 @@ import CreateElement from "../../component/Modal";
 import Popup from "../../component/Popop";
 import SearchBar from "../../component/SearchField/SearchBar";
 import LookUpValue from "../../component/lookup";
-import { useGetElementsQuery } from "../../redux/api";
+import {
+  useGetElementsQuery,
+  useAddElementMutation,
+  useDeleteElementMutation,
+} from "../../redux/api";
 import Style from "./Element.module.scss";
 import Table from "./Table";
 import { FirstTab, SecondTab } from "./forms";
+import ConfirmModal from "../../component/ConfirmModal";
+import SuccessIcon from "../../assets/SuccessIcon.svg";
+import { tab } from "@testing-library/user-event/dist/tab";
+import ReactModal from "react-modal";
+
 interface ElementType {
   //
 }
 
 const tabs = [FirstTab, SecondTab];
 
+const modalStyle = {
+  overlay: {
+    backgroundColor: "rgba(0, 0, 0, 0.45)",
+  },
+  content: {
+    inset: "169px",
+    overflow: "hidden",
+    width: "fit-content",
+    margin: "auto",
+    border: "none",
+    padding: "0",
+  },
+};
+
+const validationTabs = [
+  [
+    "name",
+    "classificationValueId",
+    "elementCategory",
+    "payrun",
+    "description",
+    "reportingName",
+  ],
+  [
+    "startDate",
+    "endDate",
+    "processingType",
+    "payFrequency",
+    "payMonths",
+    "Prorate",
+  ],
+];
+
+const initialValues = {
+  name: "",
+  description: "",
+  payRunId: "5",
+  payRunValueId: "",
+  classificationId: "2",
+  classificationValueId: "",
+  categoryId: "1",
+  categoryValueId: "",
+  reportingName: "",
+  processingType: "",
+  status: "",
+  prorate: "",
+  effectiveStartDate: "",
+  effectiveEndDate: "",
+  selectedMonths: [""],
+  payFrequency: "",
+  modifiedBy: "Adebiyi Oluwaseun Oluwademilade",
+};
+
+type FormInputTypes = {
+  name: string;
+  classificationValueId: string;
+  elementCategory: string;
+  payrun: string;
+  description: string;
+  reportingName: string;
+};
 const Element: React.FC<ElementType> = () => {
   const {
     register,
     trigger,
+    handleSubmit,
+    setValue,
+    getValues,
     formState: { errors },
-  } = useForm<any>({ mode: "onBlur" });
+  } = useForm<FormInputTypes>({ mode: "onBlur", defaultValues: initialValues });
+
+  const parseData = (data: any) => {
+    return {
+      ...data,
+      selectedMonths:
+        data.payFrequency === "selectedMonths" ? [data.payMonths] : [],
+    };
+  };
+
   const { data: elements, error, isLoading } = useGetElementsQuery();
+
+  const [addElement, {}] = useAddElementMutation();
+  const [deleteData, { isLoading: isDeleting }] = useDeleteElementMutation();
+
+  const handleDelete = (id: string) => {
+    setConfirm({
+      icon: <img src={SuccessIcon} alt="Success" />,
+      message: "Are you sure you want to delete Element?",
+      type: "delete",
+      id,
+    });
+  };
+
+  const execDelete = () => {};
+
   const [tabIndex, setTabIndex] = useState(0);
   const Component = useMemo(() => tabs[tabIndex], [tabIndex]);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
+  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+  const [confirm, setConfirm] = useState<{
+    icon?: React.ReactNode;
+    message?: string;
+    type?: "delete" | "ok";
+    id?: string;
+  }>({});
 
-  // const isValidData = trigger([
-  //   "name",
-  //   "elementClassification",
-  //   "elementCategory",
-  //   "payrun",
-  //   "description",
-  //   "reportingName",
-  // ]);
+  const handleNext = async (nextIndex: number) => {
+    if (nextIndex === -1) {
+      setModalOpen(false);
+    }
 
-  const handleNext = async (tabIndex: number) => {
-    console.log("handleNext called with tabIndex:", tabIndex);
-    if (tabIndex === 1) {
-      const isDataValid = await trigger([
-        "name",
-        "elementClassification",
-        "elementCategory",
-        "payrun",
-        "description",
-        "reportingName",
-      ]);
-      console.log("===========================> ", isDataValid);
-
-      if (!isDataValid) {
-        if (tabs.length === tabIndex) {
-          console.log("submit");
-        } else {
-          setTabIndex(tabIndex);
-          console.log("i am going to the next tab");
-        }
+    const isDataValid =
+      nextIndex < tabIndex
+        ? true
+        : await trigger(validationTabs[nextIndex - 1] as any);
+    if (!isDataValid) {
+      console.log(errors);
+      return;
+    } else {
+      if (nextIndex === tabs.length) {
+        addElement(parseData(getValues()))
+          .then((_) => {
+            setModalOpen(false);
+            setConfirm({
+              icon: <img src={SuccessIcon} alt="Success" />,
+              message: "Element has been created successfully",
+              type: "ok",
+            });
+          })
+          .catch((error: any) => {
+            console.error(error.message);
+          });
       } else {
-        return;
+        setTabIndex(nextIndex);
       }
-    } else if (tabIndex === 0) {
-      setTabIndex(0);
     }
   };
 
-  const elementColumns: ColumnDef<object>[] = [
+  const elementColumns: ColumnDef<any>[] = [
     {
       header: "Name",
       accessorKey: "name",
@@ -102,8 +201,16 @@ const Element: React.FC<ElementType> = () => {
     },
     {
       header: "Action",
+      accessorFn: (row) => row.id,
       cell: (info) => (
-        <Popup content={<Action />}>
+        <Popup
+          content={
+            <Action
+              handleDelete={handleDelete}
+              id={info.getValue() as string}
+            />
+          }
+        >
           <img src={actionButton} alt="Action" className={Style.actionImage} />
         </Popup>
       ),
@@ -138,9 +245,46 @@ const Element: React.FC<ElementType> = () => {
         steps={["Element Details", "Additional Details"]}
       >
         <form>
-          <Component register={register} errors={errors} next={handleNext} />
+          <Component
+            register={register}
+            errors={errors}
+            next={handleNext}
+            setValue={setValue}
+            defaultValues={getValues()}
+            // addElement={handleAddElement}
+          />
         </form>
       </CreateElement>
+      <ReactModal isOpen={!!confirm.message} style={modalStyle}>
+        <ConfirmModal icon={confirm.icon} message={confirm.message}>
+          <div className={Style.btnWrapper}>
+            <Button
+              onClick={() => setConfirm({})}
+              className={`${confirm.type === "delete" ? Style.confirmBtn : Style.fullBtn}`}
+            >
+              {confirm.type === "delete" ? "Cancel" : "Close to continue"}
+            </Button>
+            {confirm.type === "delete" && (
+              <Button
+                onClick={() =>
+                  deleteData(confirm.id!).then((_) =>
+                    setConfirm({
+                      icon: <img src={SuccessIcon} alt="Success" />,
+                      message: "Element has been deleted successfully",
+                      type: "ok",
+                    })
+                  )
+                }
+                className={Style.deleteBtn}
+                loading={isDeleting}
+                disabled={isDeleting}
+              >
+                Yes Delete
+              </Button>
+            )}
+          </div>
+        </ConfirmModal>
+      </ReactModal>
     </div>
   );
 };

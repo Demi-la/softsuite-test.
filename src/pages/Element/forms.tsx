@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { FormEvent, useState } from "react";
 import FormInput from "../../component/FormInput";
 import {
   DeepMap,
@@ -6,223 +6,276 @@ import {
   FieldValues,
   SubmitHandler,
   UseFormRegister,
+  UseFormSetValue,
   useForm,
 } from "react-hook-form";
 import Style from "./Forms.module.scss";
 import Select from "react-select";
 import Button from "../../component/Button";
-import { z, ZodType } from "zod";
-import { zodResolver } from "@hookform/resolvers/zod";
+import {
+  useAddElementMutation,
+  useGetLookUpValuesQuery,
+} from "../../redux/api";
 
 interface TabType {
-  register: UseFormRegister<{ [key: string]: any }>;
+  register: UseFormRegister<any>;
   errors: DeepMap<FieldValues, FieldError>;
   next: (tabIndex: number) => void;
-  // placeholder: string;
-}
-interface IFormInput {
-  name: string;
-  elementClassification: string;
-  elementCategory: string;
-  payrun: string;
-  description: string;
-  reportingName: string;
+  addElement?: typeof useAddElementMutation;
+  setValue: UseFormSetValue<any>;
+  defaultValues?: { [key: string]: any };
 }
 
-export const FirstTab: React.FC<TabType> = ({ register, errors, next }) => {
-  console.log(errors);
+export const FirstTab: React.FC<TabType> = ({
+  register,
+  errors,
+  next,
+  setValue,
+  defaultValues = {},
+}) => {
+  const { data: elementCategories = [] } = useGetLookUpValuesQuery("1");
+
+  const { data: elementClassification = [] } = useGetLookUpValuesQuery("2");
+  const { data: payrun = [] } = useGetLookUpValuesQuery("5");
+
   return (
-    <div>
+    <form>
       {/* <form> */}
-        <div className={Style.wrapper}>
-          <FormInput
-            label="Name"
-            error={errors["name"]}
-            {...register("name", { required: true, maxLength: 20 })}
-            placeholder="Input"
-          />
-
-          <FormInput
-            label="Element Classification"
-            {...register("elementClassification", {
-              required: "Element classification is required",
-            })}
-            placeholder="Select Classification"
-            error={errors["elementClassification"]}
-            inputType="select"
-            options={[
-              { value: "chocolate", label: "Chocolate" },
-              { value: "strawberry", label: "Strawberry" },
-              { value: "vanilla", label: "Vanilla" },
-            ]}
-          />
-          <FormInput
-            label="Element Category"
-            {...register("elementCategory", {
-              required: "Element category is required",
-            })}
-            placeholder="Select Element Category"
-            error={errors["elementCategory"]}
-            inputType="select"
-            options={[
-              { value: "chocolate", label: "Chocolate" },
-              { value: "strawberry", label: "Strawberry" },
-              { value: "vanilla", label: "Vanilla" },
-            ]}
-          />
-          <FormInput
-            label="Payrun"
-            {...register("payrun", {
-              required: "Element category is required",
-            })}
-            placeholder="Select Payrun"
-            error={errors["payrun"]}
-            inputType="select"
-            options={[
-              { value: "chocolate", label: "Chocolate" },
-              { value: "strawberry", label: "Strawberry" },
-            ]}
-          />
-        </div>
+      <div className={Style.wrapper}>
+        <FormInput
+          label="Name"
+          setValue={setValue}
+          defaultValue={defaultValues.name}
+          error={errors["name"]}
+          {...register("name", { required: "Name is required" })}
+          placeholder="Input"
+        />
 
         <FormInput
+          label="Element Classification"
+          setValue={setValue}
+          {...register("classificationValueId", {
+            required: "Element classification is required",
+          })}
+          placeholder="Select Classification"
+          defaultValue={defaultValues.classificationValueId}
+          error={errors["classificationValueId"]}
+          inputType="select"
+          options={elementClassification.map(
+            (items: { name: string; id: string }) => ({
+              label: items.name,
+              value: items.id,
+            })
+          )}
+        />
+        <FormInput
+          label="Element Category"
+          setValue={setValue}
+          {...register("categoryValueId", {
+            required: "Element category is required",
+          })}
+          placeholder="Select Element Category"
+          defaultValue={defaultValues.elementCategory}
+          error={errors["categoryValueId"]}
+          inputType="select"
+          options={elementCategories.map(
+            (items: { name: string; id: string }) => ({
+              label: items.name,
+              value: items.id,
+            })
+          )}
+        />
+        <FormInput
+          label="Payrun"
+          setValue={setValue}
+          {...register("payRunValueId", {
+            required: "Payrun is required",
+          })}
+          placeholder="Select Payrun"
+          defaultValue={defaultValues.payrun}
+          error={errors["payRunValueId"]}
+          inputType="select"
+          options={payrun.map((items: { name: string; id: string }) => ({
+            label: items.name,
+            value: items.id,
+          }))}
+        />
+      </div>
+
+      <div className={Style.descriptionField}>
+        <FormInput
           label="Description"
+          setValue={setValue}
           {...register("description", {
             required: "Description is required",
           })}
+          defaultValue={defaultValues.description}
           placeholder="Input Description"
           error={errors["description"]}
           inputType="textarea"
         />
+      </div>
 
-        <FormInput
-          label="Reporting Name"
-          {...register("reportingName", {
-            required: "Reporting name is required",
-          })}
-          placeholder="Input Reporting Name "
-          error={errors.reportingName?.message}
-          inputType="textarea"
-        />
+      <FormInput
+        label="Reporting Name"
+        setValue={setValue}
+        {...register("reportingName", {
+          required: "Reporting name is required",
+        })}
+        placeholder="Input Reporting Name "
+        defaultValue={defaultValues.reportingName}
+        error={errors["reportingName"]}
+        inputType="textarea"
+      />
+      <div className={Style.secondTabBtn}>
+        <Button
+          className={Style.formBackBtn}
+          type="button"
+          onClick={() => {
+            return next(-1);
+          }}
+        >
+          Cancel
+        </Button>
         <Button
           className={Style.formNextBtn}
           type="button"
           onClick={() => {
-            
-          return next(1)}}
+            return next(1);
+          }}
         >
           Next
         </Button>
-        {/* <input type="submit"/> */}
-        {/* <button
-          type="submit"
-          onClick={(e) => {
-            e.preventDefault();
-            handleSubmit(submitData)(e);
-            console.log("Button Clicked");
-          }}
-        >
-          submit
-        </button> */}
-        {/* <Button type="button" className={Style.formNextBtn}>
-          Cancel
-        </Button> */}
-      {/* </form> */}
-    </div>
+      </div>
+    </form>
   );
 };
 
-export const SecondTab: React.FC<TabType> = ({ register, errors, next }) => {
-  //   const [currentForm, setCurrentForm] = useState(1);
-  //  const handleBack = () => {
-  //   if (currentForm > 1) {
-  //     setCurrentForm(currentForm - 1);
-  //   }
+export const SecondTab: React.FC<TabType> = ({
+  register,
+  errors,
+  next,
+  setValue,
+  defaultValues = {},
+}) => {
+  const months = [
+    "January",
+    "February",
+    "March",
+    "April",
+    "May",
+    "June",
+    "July",
+    "August",
+    "September",
+    "October",
+    "November",
+    "December",
+  ];
+  const monthOptions = months.map((month, index) => ({
+    value: month,
+    label: month,
+  }));
   return (
-    <div>
+    <form>
       <div className={Style.wrapper}>
         <FormInput
           label="Effective Start Date"
-          {...register("startDate")}
+          setValue={setValue}
+          {...register("startDate", {
+            required: "Effective start date is required",
+          })}
           placeholder="Select Data"
+          defaultValue={defaultValues.startDate}
           error={errors["startDate"]}
           inputType="date"
-          // selected={startDate}
-          // onSelect={setStartDate}
-          // onChange={setStartDate}
         />
         <FormInput
           label="Effective End Date"
-          {...register("endDate")}
+          setValue={setValue}
+          {...register("endDate", {
+            required: "Effective end date is required",
+          })}
           placeholder="Select Data"
+          defaultValue={defaultValues.endDate}
           error={errors["endDate"]}
           inputType="date"
-          // selected={startDate}
-          // onSelect={setStartDate}
-          // onChange={setStartDate}
         />
 
         <FormInput
           label="Processing Type"
-          {...register("ProcessingType")}
+          setValue={setValue}
+          {...register("ProcessingType", {
+            required: "Processing type is required",
+          })}
+          defaultValue={defaultValues.processingType}
           error={errors["processingType"]}
           inputType="radio"
           options={[
-            { value: "Open", label: "Open" },
-            { value: "Close", label: "Close" },
+            { value: "open", label: "Open" },
+            { value: "close", label: "Close" },
           ]}
         />
         <FormInput
           label="Pay Frequency"
-          {...register("payFrequency")}
-          // placeholder="Select Payrun"
+          setValue={setValue}
+          {...register("payFrequency", {
+            required: "Pay frequency is required",
+          })}
+          defaultValue={defaultValues.payFrequency}
           error={errors["payFrequency"]}
           inputType="radio"
           options={[
-            { value: "Monthly", label: "Monthly" },
-            { value: "Selected Months", label: "Selected Months" },
+            { value: "monthly", label: "Monthly" },
+            { value: "selectedMonths", label: "Selected Months" },
           ]}
         />
       </div>
 
       <FormInput
+        setValue={setValue}
         label="Selected Pay Months"
-        {...register("payMonths")}
+        {...register("payMonths", {
+          required: "Selected pay months is required",
+        })}
         placeholder="Select"
+        defaultValue={defaultValues.payMonths}
         error={errors["payMonths"]}
         inputType="selectTextArea"
-        options={[
-          { value: "chocolate", label: "Chocolate" },
-          { value: "strawberry", label: "Strawberry" },
-          { value: "vanilla", label: "Vanilla" },
-        ]}
+        options={monthOptions}
       />
       <div className={Style.wrapper}>
         <FormInput
           label="Prorate"
-          {...register("Prorate")}
+          setValue={setValue}
+          {...register("Prorate", {
+            required: "Prorate is required",
+          })}
+          defaultValue={defaultValues.prorate}
           error={errors["prorate"]}
           inputType="radio"
           options={[
-            { value: "Yes", label: "Yes" },
-            { value: "No", label: "No" },
+            { value: "yes", label: "Yes" },
+            { value: "no", label: "No" },
           ]}
         />
       </div>
-      <Button
-        type="button"
-        className={Style.formNextBtn}
-        onClick={() => next(0)}
-      >
-        Back
-      </Button>
-      <Button
-        onClick={() => next(2)}
-        type="button"
-        className={Style.formNextBtn}
-      >
-        Submit
-      </Button>
-    </div>
+      <div className={Style.secondTabBtn}>
+        <Button
+          type="button"
+          className={Style.formBackBtn}
+          onClick={() => next(0)}
+        >
+          Back
+        </Button>
+        <Button
+          onClick={() => next(2)}
+          type="button"
+          className={Style.formNextBtn}
+        >
+          Submit
+        </Button>
+      </div>
+    </form>
   );
 };

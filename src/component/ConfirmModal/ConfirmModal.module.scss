@@ -1,22 +1,24 @@
 .modalContainer {
-  background-color: aqua;
-  width: 27.125rem;
-  height: 22.8125rem;
+  width: 22rem;
+  padding: 2rem;
+  gap: 1.5rem;
   border-radius: 0.5rem;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  //   margin: auto;
+
+  > button {
+    width: 80%;
+    margin-top: 1rem;
+  }
+  > p {
+    font-size: 0.9375rem;
+    color: hsla(222, 23%, 45%, 1);
+    font-weight: 500;
+  }
 }
-.modalContent {
-  //   margin: auto;
-}
-.modalIcon {
-  width: 25%;
-  margin: auto;
-  //   align-items: center;
-}
+
 .modalMessage {
   color: #57678c;
   text-align: center;

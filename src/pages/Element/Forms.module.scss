@@ -1,8 +1,29 @@
 .wrapper {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  // gap: 1.5rem;
+  gap: 1.5rem;
 }
 .selectPay {
   background-color: yellow;
+}
+.secondTabBtn {
+  display: flex;
+  gap: 3rem;
+  // padding: 2rem;
+}
+.formBackBtn {
+  flex: 1 1;
+  background-color: white;
+  color: hsla(149, 39%, 48%, 1);
+  padding: 1.5rem;
+}
+.formNextBtn {
+  flex: 1 1;
+    padding: 1.5rem;
+  
+  //  padding: 1;
+}
+
+.descriptionField {
+  margin-top: 1.5rem;
 }

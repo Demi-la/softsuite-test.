@@ -5,6 +5,8 @@ import style from "./App.module.scss";
 import { Route, Routes } from "react-router";
 import Layout from "./component/Layout";
 import Element from "./pages/Element";
+import ElementLink from "./pages/ElementLink";
+
 
 function App() {
   return (
@@ -12,6 +14,8 @@ function App() {
       <Routes>
         <Route path="/*" element={<Layout />}>
           <Route path="" element={<Element />} />
+          <Route path="ElementLink" element={<ElementLink />} />
+          {/* <Route path="ElementLink/:id" element={<ElementLink />} /> */}
         </Route>
       </Routes>
     </div>

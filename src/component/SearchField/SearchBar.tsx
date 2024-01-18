@@ -24,7 +24,7 @@ const SearchBar: React.FC<searchBarType> = (props) => {
         className={Style.searchInput}
       />
       <div className={Style.searchBTN}>
-        <button>{children}</button>
+        <button className={Style.button}>{children}</button>
       </div>
     </div>
   );

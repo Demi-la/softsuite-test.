@@ -35,3 +35,34 @@
   justify-content: end;
   margin-top: 1rem;
 }
+.confirmBtn {
+  &#{&} {
+    background-color: white;
+    color: #c8c8c8;
+    border: 1.5px solid #c8c8c8;
+    flex: 1 1;
+    width: 100%;
+  }
+}
+.deleteBtn {
+  &#{&} {
+    background-color: #e05453;
+    border: none;
+    color: white;
+    flex: 1 1;
+    width: 100%;
+  }
+}
+
+.fullBtn {
+  &#{&} {
+    width: 100%;
+  }
+}
+
+.btnWrapper {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
