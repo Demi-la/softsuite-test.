@@ -1,19 +1,13 @@
 import React, { ReactNode } from "react";
-import { useState } from "react";
-import Style from "./Search.module.scss"
+import Style from "./Search.module.scss";
 
 interface searchBarType {
   onChange?: boolean;
   value?: string;
-  children?: ReactNode
-  
-  
+  children?: ReactNode;
 }
 const SearchBar: React.FC<searchBarType> = (props) => {
   const { onChange, value, children, ...rest } = props;
-
-
-
 
   return (
     <div className={Style.searchWrapper}>
@@ -28,8 +22,6 @@ const SearchBar: React.FC<searchBarType> = (props) => {
       </div>
     </div>
   );
-  
-  
 };
 
 export default SearchBar;

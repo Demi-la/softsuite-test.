@@ -18,6 +18,10 @@
   width: 8rem;
   background-color: white;
   padding: 0.5rem;
+
+  > a {
+    text-decoration: none;
+  }
 }
 .view,
 .edit,
@@ -27,12 +31,9 @@
   font-size: 0.75rem;
   font-weight: 500;
   gap: 0.5rem;
-
-  
+  cursor: pointer;
 }
+
 .show {
   display: block;
-}
-Link {
-  text-decoration: none;
 }

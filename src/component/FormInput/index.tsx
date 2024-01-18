@@ -1,14 +1,8 @@
-import React, { HTMLAttributes } from "react";
+import React from "react";
 import Style from "./FormInput.module.scss";
-import {
-  useForm,
-  SubmitHandler,
-  UseFormRegisterReturn,
-  UseFormSetValue,
-} from "react-hook-form";
+import { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
 import Select from "react-select";
 import Switch from "react-switch";
-import { useState } from "react";
 
 interface FormInputType extends Partial<UseFormRegisterReturn> {
   inputType?: string;
@@ -38,8 +32,6 @@ const FormInput: React.FC<FormInputType> = ({
   setValue,
   ...rest
 }) => {
-  // const { register, handleSubmit, formState: { errors } } = useForm<any>();
-
   return (
     <div className={Style.formInputContainer}>
       <label className={Style.formLabel}>{label}</label>
@@ -47,7 +39,6 @@ const FormInput: React.FC<FormInputType> = ({
         {(() => {
           switch (inputType) {
             case "textarea":
-              console.log(defaultValue, "KKKKKK");
               return (
                 <textarea
                   defaultValue={defaultValue}
@@ -74,7 +65,6 @@ const FormInput: React.FC<FormInputType> = ({
                   options={options}
                   {...rest}
                   onChange={(option) => {
-                    console.log(option);
                     setValue(rest.name!, option?.value);
                   }}
                   className={Style.selectTextArea}
@@ -102,7 +92,6 @@ const FormInput: React.FC<FormInputType> = ({
                         onChange={() => {
                           setValue(rest.name!, option.value);
                         }}
-                        // onSelect={() => setValue(rest.name!, option.value)}
                       />
                       <span>{option.label}</span>
                     </label>

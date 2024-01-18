@@ -21,7 +21,7 @@ import Table from "./Table";
 import { FirstTab, SecondTab } from "./forms";
 import ConfirmModal from "../../component/ConfirmModal";
 import SuccessIcon from "../../assets/SuccessIcon.svg";
-import { tab } from "@testing-library/user-event/dist/tab";
+import DeleteIcon from "../../assets/DeleteIcon.svg";
 import ReactModal from "react-modal";
 
 interface ElementType {
@@ -95,7 +95,7 @@ const Element: React.FC<ElementType> = () => {
   const {
     register,
     trigger,
-    handleSubmit,
+
     setValue,
     getValues,
     formState: { errors },
@@ -116,20 +116,18 @@ const Element: React.FC<ElementType> = () => {
 
   const handleDelete = (id: string) => {
     setConfirm({
-      icon: <img src={SuccessIcon} alt="Success" />,
+      icon: <img src={DeleteIcon} alt="Success" />,
       message: "Are you sure you want to delete Element?",
       type: "delete",
       id,
     });
   };
 
-  const execDelete = () => {};
-
   const [tabIndex, setTabIndex] = useState(0);
   const Component = useMemo(() => tabs[tabIndex], [tabIndex]);
 
   const [modalOpen, setModalOpen] = useState<boolean>(false);
-  const [isSuccess, setIsSuccess] = useState<boolean>(false);
+
   const [confirm, setConfirm] = useState<{
     icon?: React.ReactNode;
     message?: string;
@@ -147,7 +145,6 @@ const Element: React.FC<ElementType> = () => {
         ? true
         : await trigger(validationTabs[nextIndex - 1] as any);
     if (!isDataValid) {
-      console.log(errors);
       return;
     } else {
       if (nextIndex === tabs.length) {
@@ -251,7 +248,6 @@ const Element: React.FC<ElementType> = () => {
             next={handleNext}
             setValue={setValue}
             defaultValues={getValues()}
-            // addElement={handleAddElement}
           />
         </form>
       </CreateElement>
@@ -260,7 +256,9 @@ const Element: React.FC<ElementType> = () => {
           <div className={Style.btnWrapper}>
             <Button
               onClick={() => setConfirm({})}
-              className={`${confirm.type === "delete" ? Style.confirmBtn : Style.fullBtn}`}
+              className={`${
+                confirm.type === "delete" ? Style.confirmBtn : Style.fullBtn
+              }`}
             >
               {confirm.type === "delete" ? "Cancel" : "Close to continue"}
             </Button>

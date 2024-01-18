@@ -1,9 +1,6 @@
 import React from "react";
 import Style from "./CreateElement.module.scss";
-import Modal from "react-modal";
 import ReactModal from "react-modal";
-import { useState } from "react";
-import Button from "../Button";
 import arrow from "../../assets/Check.svg";
 interface CreateElementType {
   children: React.ReactNode;
@@ -19,7 +16,7 @@ const modalStyle = {
     backgroundColor: "rgba(0, 0, 0, 0.45)",
   },
   content: {
-    inset: "10px",
+    inset: "70px",
     width: "50rem",
     margin: "auto",
     border: "none",
@@ -49,9 +46,7 @@ const CreateElement: React.FC<CreateElementType> = ({
           {steps.map((step, index) => (
             <div key={index} className={Style.stepperWrapper}>
               <div className={Style.stepperContent}>{step}</div>
-              <div className={Style.stepper}>
-                {/* {stepperCurrentStep >= index + 1 ? "red" : "green"} */}
-              </div>
+              <div className={Style.stepper}></div>
               <div className={Style.stepper}>
                 {stepperCurrentStep > index + 1 ? (
                   <img src={arrow} alt="" />

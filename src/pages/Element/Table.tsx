@@ -40,8 +40,6 @@ const Table: React.FC<TableType> = (props) => {
     onGlobalFilterChange: setFiltering,
   });
 
-  
-  
   return (
     <div>
       {/* <input
@@ -82,10 +80,8 @@ const Table: React.FC<TableType> = (props) => {
         </tbody>
       </table>
       <div className={Style.PaginationBtn}>
-        {/* <button onClick={() => table.setPageIndex(0)}>First page</button> */}
         <button
           disabled={!table.getCanPreviousPage()}
-          // onClick={() => table.previousPage()}
           onClick={() => table.setPageIndex(0)}
           className={Style.leftBtn}
         >
@@ -94,14 +90,10 @@ const Table: React.FC<TableType> = (props) => {
         <button
           disabled={!table.getCanNextPage()}
           onClick={() => table.setPageIndex(table.getPageCount() - 1)}
-          // onClick={() => table.nextPage()}
           className={Style.rightBtn}
         >
           <MdArrowForwardIos />
         </button>
-        {/* <button onClick={() => table.setPageIndex(table.getPageCount() - 1)}>
-          Last page
-        </button> */}
       </div>
     </div>
   );

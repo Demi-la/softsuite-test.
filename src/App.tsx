@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/*" element={<Layout />}>
           <Route path="" element={<Element />} />
-          <Route path="ElementLink" element={<ElementLink />} />
+          <Route path="element_link" element={<ElementLink />} />
           {/* <Route path="ElementLink/:id" element={<ElementLink />} /> */}
         </Route>
       </Routes>

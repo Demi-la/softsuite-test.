@@ -2,7 +2,7 @@
   color: #818da9;
   font-size: 0.875rem;
   font-weight: 400;
-    outline: none;
+  outline: none;
 }
 input,
 .radioWrapper {
@@ -21,17 +21,12 @@ input,
   margin-top: 0.5rem;
   border: 1px solid #e5e5e5;
   margin-bottom: 1.5rem;
-
-  //   padding: 1rem;
 }
 .selectInput {
   margin-top: 0.5rem;
   width: 100%;
   gap: 2rem;
   border: none;
- 
-    
-  //   padding: 3rem;
   > div {
     padding: 8px;
 
@@ -46,10 +41,6 @@ input,
   gap: 2rem;
   padding: 1rem;
 
-  // width: 60%;
-  // padding: 0;
-  // border: 1px soild orange;
-
   > label {
     display: flex;
     align-items: center;
@@ -58,26 +49,19 @@ input,
     font-weight: 500;
     color: #2d416f;
     padding: 0;
-    // border: 1px soild orange;
 
     > input {
       margin: 0;
       accent-color: green;
     }
-
-    // > input[type="radio"] {
-    //   accent-color: #4baa79;
-    // }
   }
 }
 .radioLabel {
   border: 10px soild orange;
 }
 .selectTextArea {
-  // padding: 1rem;
   outline: none;
   width: 100%;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
-  // margin-top: 0.5rem;
 }

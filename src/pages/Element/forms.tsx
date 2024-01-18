@@ -1,13 +1,11 @@
-import React, { FormEvent, useState } from "react";
+import React from "react";
 import FormInput from "../../component/FormInput";
 import {
   DeepMap,
   FieldError,
   FieldValues,
-  SubmitHandler,
   UseFormRegister,
   UseFormSetValue,
-  useForm,
 } from "react-hook-form";
 import Style from "./Forms.module.scss";
 import Select from "react-select";
@@ -40,7 +38,6 @@ export const FirstTab: React.FC<TabType> = ({
 
   return (
     <form>
-      {/* <form> */}
       <div className={Style.wrapper}>
         <FormInput
           label="Name"

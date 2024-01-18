@@ -1,6 +1,5 @@
 import React from "react";
 import Style from "./Popup.module.scss";
-import ActionButton from "../../assets/actionButton.svg";
 import { useState } from "react";
 
 interface PopupType {

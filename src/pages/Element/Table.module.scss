@@ -25,8 +25,9 @@ table {
   display: flex;
   gap: 2rem;
   margin-top: 1.88rem;
-   justify-content: end;
-   margin-right: 2rem;
+  justify-content: end;
+  margin-right: 2rem;
+ 
 }
 .leftBtn,
 .rightBtn {
@@ -39,5 +40,6 @@ table {
   color: #2d416f;
   border: none;
   border-radius: 0.25rem;
+  margin-bottom: 1rem;
   
 }

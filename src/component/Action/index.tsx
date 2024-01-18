@@ -1,5 +1,4 @@
 import React from "react";
-import { LuEye } from "react-icons/lu";
 import Edit from "../../assets/Edit.svg";
 import Delete from "../../assets/Delete.svg";
 import Eye from "../../assets/Eye.svg";
@@ -9,7 +8,7 @@ import { Link } from "react-router-dom";
 const Action = ({ id, handleDelete }: any) => {
   return (
     <div className={Style.actionPopup}>
-      <Link to="/ElementLink">
+      <Link to="/element_link">
         <div className={Style.view}>
           <img src={Eye} alt="Edit" />
           <p>View Element Links</p>
