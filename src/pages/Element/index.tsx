@@ -1,8 +1,14 @@
 import { ColumnDef } from "@tanstack/react-table";
+import ReactModal from "react-modal";
 import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiSearch } from "react-icons/ci";
-import { FIlterBtn, Action as ActionIcon } from "../../media";
+import {
+  FIlterBtn,
+  Action as ActionIcon,
+  SuccessIcon,
+  DeleteIcon,
+} from "../../media";
 import Action from "../../component/Action";
 import Button from "../../component/Button";
 import { FiPlus } from "react-icons/fi";
@@ -19,9 +25,6 @@ import Style from "./Element.module.scss";
 import Table from "./Table";
 import { FirstTab, SecondTab } from "./forms";
 import ConfirmModal from "../../component/ConfirmModal";
-import success_icon from "../../assets/success_icon.svg";
-import delete_icon from "../../assets/delete_icon.svg";
-import ReactModal from "react-modal";
 
 interface ElementType {
   //
@@ -114,7 +117,7 @@ const Element: React.FC<ElementType> = () => {
 
   const handleDelete = (id: string) => {
     setConfirm({
-      icon: <img src={delete_icon} alt="Success" />,
+      icon: <DeleteIcon />,
       message: "Are you sure you want to delete Element?",
       type: "delete",
       id,
@@ -150,7 +153,7 @@ const Element: React.FC<ElementType> = () => {
           .then((_) => {
             setModalOpen(false);
             setConfirm({
-              icon: <img src={success_icon} alt="Success" />,
+              icon: <SuccessIcon />,
               message: "Element has been created successfully",
               type: "ok",
             });
@@ -266,7 +269,7 @@ const Element: React.FC<ElementType> = () => {
                 onClick={() =>
                   deleteData(confirm.id!).then((_) =>
                     setConfirm({
-                      icon: <img src={success_icon} alt="Success" />,
+                      icon: <DeleteIcon />,
                       message: "Element has been deleted successfully",
                       type: "ok",
                     })
