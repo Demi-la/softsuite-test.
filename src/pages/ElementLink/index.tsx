@@ -10,9 +10,10 @@ import { CiSearch } from "react-icons/ci";
 import Button from "../../component/Button";
 import { FiPlus } from "react-icons/fi";
 import Style from "./ElementLink.module.scss";
-import element_link_editicon from "../../assets/element_link_editicon.svg";
-import element_link_deleteicon from "../../assets/element_link_deleteicon.svg";
-interface ElementLinkType {
+import {
+ ElementLinkEditIcon,
+ ElementLinkDeleteIcon
+} from "../../media";interface ElementLinkType {
   id: any;
 }
 
@@ -43,8 +44,8 @@ const elementLinKColumns: ColumnDef<object>[] = [
     header: "Action",
     cell: (info) => (
       <div className={Style.actionBTns}>
-        <img src={element_link_editicon} alt="Action" />
-        <img src={element_link_deleteicon} alt="Action" />
+        <ElementLinkEditIcon />
+        <ElementLinkDeleteIcon />
       </div>
     ),
   },

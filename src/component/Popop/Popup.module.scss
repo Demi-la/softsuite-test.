@@ -15,7 +15,7 @@
 }
 .actionPopup {
   height: 8rem;
-  width: 8rem;
+  width: 9rem;
   background-color: white;
   padding: 0.5rem;
 
@@ -27,6 +27,7 @@
 .edit,
 .delete {
   display: flex;
+  align-items: center;
   color: #2d416f;
   font-size: 0.75rem;
   font-weight: 500;

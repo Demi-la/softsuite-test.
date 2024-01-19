@@ -1,25 +1,23 @@
 import React from "react";
-import Edit from "../../assets/Edit.svg";
-import Delete from "../../assets/Delete.svg";
-import Eye from "../../assets/Eye.svg";
+import { Edit, Delete, Eye } from "../../media";
 import Style from "../Popop/Popup.module.scss";
 import { Link } from "react-router-dom";
 
 const Action = ({ id, handleDelete }: any) => {
   return (
     <div className={Style.actionPopup}>
-      <Link to={`/element_link/${id}`} >
+      <Link to={`/element_link/${id}`}>
         <div className={Style.view}>
-          <img src={Eye} alt="Edit" />
+          <Eye />
           <p>View Element Links</p>
         </div>
       </Link>
       <div className={Style.edit}>
-        <img src={Edit} alt="Edit" />
+        <Edit />
         <p>Edit Element</p>
       </div>
       <div className={Style.delete} onClick={() => handleDelete(id)}>
-        <img src={Delete} alt="Delete" />
+        <Delete />
         <p>Delete Element</p>
       </div>
     </div>

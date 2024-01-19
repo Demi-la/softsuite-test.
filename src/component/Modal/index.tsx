@@ -1,7 +1,9 @@
 import React from "react";
 import Style from "./CreateElement.module.scss";
 import ReactModal from "react-modal";
-import arrow from "../../assets/Check.svg";
+import {
+ Check
+} from "../../media";
 interface CreateElementType {
   children: React.ReactNode;
   isOpen: boolean;
@@ -49,7 +51,7 @@ const CreateElement: React.FC<CreateElementType> = ({
               <div className={Style.stepper}></div>
               <div className={Style.stepper}>
                 {stepperCurrentStep > index + 1 ? (
-                  <img src={arrow} alt="" />
+                  <Check/>
                 ) : (
                   index + 1
                 )}

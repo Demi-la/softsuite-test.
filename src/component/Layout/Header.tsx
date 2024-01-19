@@ -1,7 +1,9 @@
 import React from "react";
 import Style from "./Layout.module.scss";
-import Logo from "../../assets/Logo.svg";
-import Notification from "../../assets/Notification.svg";
+import {
+Logo,
+Notification
+} from "../../media";
 import Henry from "../../assets/Henry.png";
 
 interface HeaderType {}
@@ -10,12 +12,10 @@ const Header: React.FC<HeaderType> = () => {
   console.log(Style);
   return (
     <header className={Style.header}>
-      <img src={Logo} alt="SoftSuite Logo" className={Style.logo} />
+      <Logo className={Style.logo} />
 
       <div className={Style.profileDetails}>
-        <img
-          src={Notification}
-          alt="Notification"
+        <Notification
           className={Style.notificationBell}
         />
         <img src={Henry} alt="Profile" className={Style.profilePicture} />
