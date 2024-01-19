@@ -4,11 +4,11 @@ import {
   DeepMap,
   FieldError,
   FieldValues,
+  UseFormGetValues,
   UseFormRegister,
   UseFormSetValue,
 } from "react-hook-form";
 import Style from "./Forms.module.scss";
-import Select from "react-select";
 import Button from "../../component/Button";
 import {
   useAddElementMutation,
@@ -22,6 +22,7 @@ interface TabType {
   addElement?: typeof useAddElementMutation;
   setValue: UseFormSetValue<any>;
   defaultValues?: { [key: string]: any };
+  getValues?: UseFormGetValues<any>;
 }
 
 export const FirstTab: React.FC<TabType> = ({
@@ -29,6 +30,7 @@ export const FirstTab: React.FC<TabType> = ({
   errors,
   next,
   setValue,
+  getValues,
   defaultValues = {},
 }) => {
   const { data: elementCategories = [] } = useGetLookUpValuesQuery("1");
@@ -153,6 +155,7 @@ export const SecondTab: React.FC<TabType> = ({
   errors,
   next,
   setValue,
+  getValues,
   defaultValues = {},
 }) => {
   const months = [
@@ -255,6 +258,18 @@ export const SecondTab: React.FC<TabType> = ({
             { value: "yes", label: "Yes" },
             { value: "no", label: "No" },
           ]}
+        />
+
+        <FormInput
+          label="Status"
+          getValues={getValues}
+          setValue={setValue}
+          {...register("status", {
+            required: "status is required",
+          })}
+          defaultValue={defaultValues.status}
+          error={errors["status"]}
+          inputType="switch"
         />
       </div>
       <div className={Style.secondTabBtn}>

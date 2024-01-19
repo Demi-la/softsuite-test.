@@ -95,7 +95,6 @@ const Element: React.FC<ElementType> = () => {
   const {
     register,
     trigger,
-
     setValue,
     getValues,
     formState: { errors },
@@ -247,6 +246,7 @@ const Element: React.FC<ElementType> = () => {
             errors={errors}
             next={handleNext}
             setValue={setValue}
+            getValues={getValues}
             defaultValues={getValues()}
           />
         </form>

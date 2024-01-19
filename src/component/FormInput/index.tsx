@@ -1,6 +1,10 @@
 import React from "react";
 import Style from "./FormInput.module.scss";
-import { UseFormRegisterReturn, UseFormSetValue } from "react-hook-form";
+import {
+  UseFormGetValues,
+  UseFormRegisterReturn,
+  UseFormSetValue,
+} from "react-hook-form";
 import Select from "react-select";
 import Switch from "react-switch";
 
@@ -17,6 +21,7 @@ interface FormInputType extends Partial<UseFormRegisterReturn> {
   selected?: any;
   onSelect?: any;
   className?: string;
+  getValues?: UseFormGetValues<any>;
 }
 const FormInput: React.FC<FormInputType> = ({
   inputType = "text",
@@ -30,6 +35,7 @@ const FormInput: React.FC<FormInputType> = ({
   onSelect,
   className,
   setValue,
+  getValues,
   ...rest
 }) => {
   return (
@@ -45,6 +51,7 @@ const FormInput: React.FC<FormInputType> = ({
                   {...rest}
                   onChange={(e) => setValue(rest.name!, e.target.value)}
                   className={Style.descriptionText}
+                  placeholder={placeholder}
                 />
               );
             case "select":
@@ -68,6 +75,7 @@ const FormInput: React.FC<FormInputType> = ({
                     setValue(rest.name!, option?.value);
                   }}
                   className={Style.selectTextArea}
+                  placeholder={placeholder}
                 />
               );
             case "date":
@@ -100,12 +108,22 @@ const FormInput: React.FC<FormInputType> = ({
               );
 
             case "switch":
-              return <input type="text" />;
+              return (
+                <div className={Style.SwitchInput}>
+                  <Switch
+                    onChange={() =>
+                      setValue(rest.name!, !getValues?.(rest.name!))
+                    }
+                    checked={Boolean(getValues?.(rest.name!))}
+                  />
+                </div>
+              );
 
             default:
               return (
                 <input
                   defaultValue={defaultValue}
+                  placeholder={placeholder}
                   {...rest}
                   onChange={(e) => setValue(rest.name!, e.target.value)}
                 />

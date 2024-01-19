@@ -23,6 +23,9 @@ export const apiRequest = createApi({
     getLookUps: builder.query<any, void>({
       query: () => "lookups",
     }),
+    getElementDetails: builder.query<any, string>({
+      query: (id) => `elements/${id}`,
+    }),
     getLookUpValueById: builder.query<
       any,
       { lookupId: string; lookupValueId: string }
@@ -58,4 +61,5 @@ export const {
   useAddElementMutation,
   useGetLookUpValuesQuery,
   useDeleteElementMutation,
+  useGetElementDetailsQuery,
 } = apiRequest;

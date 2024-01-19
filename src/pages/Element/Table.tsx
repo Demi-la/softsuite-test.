@@ -42,11 +42,6 @@ const Table: React.FC<TableType> = (props) => {
 
   return (
     <div>
-      {/* <input
-        type="text"
-        value={filtering}
-        onChange={(e) => setFiltering(e.target.value)}
-      /> */}
       <table>
         <thead className={Style.tableHeader}>
           {table.getHeaderGroups().map((headerGroup) => (

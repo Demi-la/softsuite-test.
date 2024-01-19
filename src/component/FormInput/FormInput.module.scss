@@ -49,10 +49,12 @@ input,
     font-weight: 500;
     color: #2d416f;
     padding: 0;
+    flex-grow: 1;
 
     > input {
       margin: 0;
       accent-color: green;
+      width: fit-content;
     }
   }
 }
@@ -64,4 +66,10 @@ input,
   width: 100%;
   margin-top: 0.5rem;
   margin-bottom: 1.5rem;
+}
+.SwitchInput {
+  border: 1px solid #e5e5e5;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  border-radius: 0.25rem;
 }

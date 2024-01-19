@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Action = ({ id, handleDelete }: any) => {
   return (
     <div className={Style.actionPopup}>
-      <Link to="/element_link">
+      <Link to={`/element_link/${id}`} >
         <div className={Style.view}>
           <img src={Eye} alt="Edit" />
           <p>View Element Links</p>

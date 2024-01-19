@@ -1,0 +1,65 @@
+.contentContainer {
+  background-color: white;
+  width: 95%;
+  margin-top: 2.75rem;
+  margin-left: 2rem;
+}
+.title {
+  font-size: 1.1875rem;
+  color: hsla(222, 42%, 31%, 1);
+  font-weight: 700;
+  padding: 1.5rem;
+}
+.modalHeader {
+  background-color: #f4f6f8;
+  padding: 1rem;
+  margin: 1rem;
+  height: 3rem;
+}
+.ElementLinkWrapper {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.ElementDetailsTableWrapper {
+     padding: 4rem;
+}
+.ElementDetailsTable {
+  border-left: 1px solid #d4d8e2;
+  border-top: 1px solid #d4d8e2;
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+ 
+  
+
+  > div {
+    border-right: 1px solid #d4d8e2;
+    border-bottom: 1px solid #d4d8e2;
+    display: flex;
+    flex-direction: column;
+    width: 49%;
+    padding: 3px;
+
+    > span:first-child {
+      color: #7e7e7e;
+      font-weight: 500;
+      font-size: 0.6875rem;
+      padding: 5px;
+    }
+    > span:last-child {
+      color: hsla(222, 42%, 31%, 1);
+      font-size: 0.875rem;
+      font-weight: 500;
+      padding: 5px;
+    }
+  }
+}
+.search {
+  display: flex;
+  gap: 1rem;
+}
+.actionBTns {
+  display: flex;
+  gap: 1rem;
+}
