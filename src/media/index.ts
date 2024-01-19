@@ -11,3 +11,7 @@ export { ReactComponent as Eye } from "./Eye.svg";
 export { ReactComponent as Logo } from "./Logo.svg";
 export { ReactComponent as ModalDelecteIcon } from "./modal_deleteicon.svg";
 export { ReactComponent as Notification } from "./Notification.svg";
+export { ReactComponent as User } from "./User.svg";
+
+
+
