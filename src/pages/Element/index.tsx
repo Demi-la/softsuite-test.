@@ -2,8 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiSearch } from "react-icons/ci";
-import { ReactComponent as FIlterBtn } from "../../assets/filter_btn.svg";
-import action from "../../assets/action.svg";
+import { FIlterBtn, Action as ActionIcon } from "../../assets";
 import Action from "../../component/Action";
 import Button from "../../component/Button";
 import { FiPlus } from "react-icons/fi";
@@ -207,7 +206,7 @@ const Element: React.FC<ElementType> = () => {
             />
           }
         >
-          <img src={action} alt="Action" className={Style.actionImage} />
+          <ActionIcon className={Style.actionImage} />
         </Popup>
       ),
     },
