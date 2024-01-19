@@ -1,11 +1,6 @@
 import React from "react";
 import Style from "./Layout.module.scss";
-import {
-Logo,
-Notification,
-User
-} from "../../media";
-
+import { Logo, Notification} from "../../media";
 
 interface HeaderType {}
 
@@ -16,10 +11,12 @@ const Header: React.FC<HeaderType> = () => {
       <Logo className={Style.logo} />
 
       <div className={Style.profileDetails}>
-        <Notification
-          className={Style.notificationBell}
+        <Notification className={Style.notificationBell} />
+        <img
+          src="/images/user.png"
+          alt="Profile"
+          className={Style.profilePicture}
         />
-        <User className={Style.profilePicture} />
         <div>
           <p className={Style.profileName}>Henry Okoro</p>
           <p className={Style.profileRole}>Payroll Manager</p>
