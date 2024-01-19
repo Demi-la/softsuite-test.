@@ -107,6 +107,7 @@ const Element: React.FC<ElementType> = () => {
       ...data,
       selectedMonths:
         data.payFrequency === "selectedMonths" ? [data.payMonths] : [],
+      status: data.status ? "active" : "inactive",
     };
   };
 
@@ -188,6 +189,17 @@ const Element: React.FC<ElementType> = () => {
     {
       header: "Status",
       accessorKey: "status",
+      cell: (info) => (
+        <span
+          className={
+            (info.getValue() as string) === "active"
+              ? `${Style.activeBackground}`
+              : `${Style.inactiveBackground}`
+          }
+        >
+          {(info.getValue() as string) === "active" ? "active" : "inactive"}
+        </span>
+      ),
     },
     {
       header: "Date & Time Modified",
