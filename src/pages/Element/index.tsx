@@ -3,7 +3,7 @@ import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiSearch } from "react-icons/ci";
 import { FiPlus } from "react-icons/fi";
-import FilterBtn from "../../assets/FilterBtn.svg";
+// import FilterBtn from "../../assets/FilterBtn.svg";
 import actionButton from "../../assets/actionButton.svg";
 import Action from "../../component/Action";
 import Button from "../../component/Button";
@@ -220,7 +220,7 @@ const Element: React.FC<ElementType> = () => {
         <div className={Style.Wrapper}>
           <div className={Style.search}>
             <SearchBar children={<CiSearch />} />
-            <img src={FilterBtn} alt="Filter" />
+            {/* <img src={FilterBtn} alt="Filter" /> */}
           </div>
           <Button
             icon={<FiPlus />}
