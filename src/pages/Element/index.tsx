@@ -2,7 +2,7 @@ import { ColumnDef } from "@tanstack/react-table";
 import React, { useMemo, useState } from "react";
 import { useForm } from "react-hook-form";
 import { CiSearch } from "react-icons/ci";
-import { FIlterBtn, Action as ActionIcon } from "../../assets";
+import { FIlterBtn, Action as ActionIcon } from "../../media";
 import Action from "../../component/Action";
 import Button from "../../component/Button";
 import { FiPlus } from "react-icons/fi";
